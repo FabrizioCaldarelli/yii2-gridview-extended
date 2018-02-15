@@ -28,7 +28,7 @@ namespace sfmobile\ext\gridViewExtended;
      /**
      * Css class for row with data (not empty row)
      */
-     public rowDataCssClass = 'row-data';
+     public $rowDataCssClass = 'row-data';
 
      /**
      * We need to distinguish row data from empty row. Since tableRow data GridView implementation
