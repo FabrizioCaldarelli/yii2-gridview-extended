@@ -21,9 +21,9 @@ namespace sfmobile\ext\gridViewExtended;
      public $addActionColumn = true;
 
      /**
-     * If enableRowClickToView is true, when user will click on the row, this url will be navigated
+     * If enableRowClickToView is true, when user will click on the row, this javascript code will be called
      */
-     public $rowClickViewUrl = ['view'];
+     public $rowClickJavascriptCallback = null;
 
      /**
      * Css class for row with data (not empty row)
@@ -94,7 +94,7 @@ namespace sfmobile\ext\gridViewExtended;
          if($this->enableRowClickToView)
          {
              $id = $this->options['id'];
-             $viewUrl = \yii\helpers\Url::to($this->rowClickViewUrl);
+             $viewUrl = \yii\helpers\Url::to(['view']);
 
              $this->getView()->registerCss("
                  #{$id} table tbody tr.{$this->rowDataCssClass}:hover {
@@ -102,11 +102,17 @@ namespace sfmobile\ext\gridViewExtended;
                  }
              ");
 
-             $this->getView()->registerJs("
+             $javascriptCallback = $this->rowClickJavascriptCallback;
+             if($javascriptCallback == null)
+             {
+                 $javascriptCallback = "location = '{$viewUrl}?id='+$(this).attr('data-key');";
+             }
+
+             $this->getView()->registerJs(sprintf("
                  $(document).on('click', '#{$id} table tbody tr.{$this->rowDataCssClass}', function(ev) {
-                     location = '{$viewUrl}?id='+$(this).attr('data-key');
+                     %s
                  });
-             ");
+             ", $javascriptCallback));
          }
      }
 
