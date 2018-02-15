@@ -1,0 +1,21 @@
+{
+    "name": "fabriziocaldarelli/yii2-gridview-extended",
+    "description": "Yii2 GridView Extended",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","grid view"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fabrizio Caldarelli",
+            "email": "fabriziocaldarelli@negusweb.it"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "sfmobile\\ext\\gridViewExtended\\": ""
+        }
+    }
+}
