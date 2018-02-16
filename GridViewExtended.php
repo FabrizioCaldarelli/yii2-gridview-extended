@@ -6,7 +6,7 @@ namespace sfmobile\ext\gridViewExtended;
  * GridViewExtended
  * @copyright Copyright &copy; Fabrizio Caldarelli, sfmobile.it, 2017
  * @package yii2-gridview-extended
- * @version 1.0.0
+ * @version 1.0.1
  */
  class GridViewExtended extends \yii\grid\GridView
  {
@@ -29,6 +29,12 @@ namespace sfmobile\ext\gridViewExtended;
      * Css class for row with data (not empty row)
      */
      public $rowDataCssClass = 'row-data';
+
+     /**
+     * Enable default extended table css class
+     * @since 1.0.1
+     */
+     public $enableDefaultExtendedTableCssClass = true;
 
      /**
      * We need to distinguish row data from empty row. Since tableRow data GridView implementation
@@ -116,6 +122,18 @@ namespace sfmobile\ext\gridViewExtended;
          }
      }
 
+     /**
+     * If enableDefaultExtendedTableCssClass is true, add bootstrap css classes for table
+     * @since 1.0.1
+     */
+     protected function checkIfNeedToEnableDefaultExtendedTableCssClass()
+     {
+         if($this->enableDefaultExtendedTableCssClass)
+         {
+             $this->tableOptions = array_merge($this->tableOptions, ['class' => 'table table-striped table-bordered table-hover']);
+         }
+     }
+
      public function init()
      {
          $this->extendsRowOptions();
@@ -127,6 +145,7 @@ namespace sfmobile\ext\gridViewExtended;
 
          $this->checkIfNeedToEnableRowClickToView();
 
+         $this->checkIfNeedToEnableDefaultExtendedTableCssClass();
      }
  }
 
